@@ -41,7 +41,7 @@ func AssigmentInvesment(w http.ResponseWriter, r *http.Request) {
         "credit_type_700": credit700,
     }
 
-    jsonResponse := json.Marshal(credits)
+    jsonResponse, err := json.Marshal(credits)
 
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
