@@ -20,6 +20,17 @@ make run
 ```bash
 POST - http://{{host}}/credit-assigment
 ```
+
+Ejemplo
+
+```curl
+curl  -X POST \
+  'http://localhost:8000/credit-assigment' \
+  --header 'Accept: */*' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"investment": 3000}'
+```
+
 ## Deploy
 
 PROD: Se usa [Serverless Framework](https://www.serverless.com/framework/docs/getting-started) para el deploy de la API, se require tener una cuenta de AWS.
