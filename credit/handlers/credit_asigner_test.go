@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"bytes"
@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"yofio-api/credit/handlers"
 )
 
 func TestAssigmentInvestment(t *testing.T) {
@@ -18,7 +16,7 @@ func TestAssigmentInvestment(t *testing.T) {
 	req := httptest.NewRequest("POST", "/credit-assigment", bodyReader)
 	w := httptest.NewRecorder()
 
-	handlers.AssigmentInvestment(w, req)
+	AssigmentInvestment(w, req)
 
 	if w.Code != http.StatusOK {
 		t.Errorf("Waiting http status %d but received %d", http.StatusOK, w.Code)
@@ -34,7 +32,7 @@ func TestBadRequest(t *testing.T) {
 	req := httptest.NewRequest("POST", "/credit-assigment", nil)
 	w := httptest.NewRecorder()
 
-	handlers.AssigmentInvestment(w, req)
+	AssigmentInvestment(w, req)
 
 	if w.Code != http.StatusBadRequest {
 		t.Errorf("Waiting http status %d but received %d", http.StatusBadRequest, w.Code)
@@ -49,7 +47,7 @@ func TestAssigmentInvestmentWithInvalidAmount(t *testing.T) {
 	req := httptest.NewRequest("POST", "/credit-assigment", bodyReader)
 	w := httptest.NewRecorder()
 
-	handlers.AssigmentInvestment(w, req)
+	AssigmentInvestment(w, req)
 
 	if w.Code != http.StatusBadRequest {
 		t.Errorf("Waiting http status %d but received %d", http.StatusBadRequest, w.Code)
@@ -57,7 +55,7 @@ func TestAssigmentInvestmentWithInvalidAmount(t *testing.T) {
 }
 
 func TestAsigmentInvestmentWithValidAmount(t *testing.T) {
-	creditAssigner := &handlers.CreditAssignerImpl{}
+	creditAssigner := &CreditAssignerImpl{}
 	investment := int32(6700)
 
 	c300, c500, c700, _ := creditAssigner.Assign(investment)
@@ -76,7 +74,7 @@ func TestAsigmentInvestmentWithValidAmount(t *testing.T) {
 }
 
 func TestAssignWithInvalitAmount(t *testing.T) {
-	creditAssigner := &handlers.CreditAssignerImpl{}
+	creditAssigner := &CreditAssignerImpl{}
 	investment := int32(250)
 
 	_, _, _, err := creditAssigner.Assign(investment)
@@ -93,7 +91,7 @@ func TestAssignWithInvalitAmount(t *testing.T) {
 }
 
 func TestAssignInvalid(t *testing.T) {
-	creditAssigner := &handlers.CreditAssignerImpl{}
+	creditAssigner := &CreditAssignerImpl{}
 	investment := int32(400)
 
 	_, _, _, err := creditAssigner.Assign(investment)

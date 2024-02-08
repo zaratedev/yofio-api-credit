@@ -30,5 +30,5 @@ make deploy
 
 ### Unit Test
 ```bash
-go test ./tests -v
+go test ./... -v
 ```
