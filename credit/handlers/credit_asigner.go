@@ -16,7 +16,7 @@ type Credit struct {
     Investment int32 `json:"investment"`
 }
 
-func AssigmentInvesment(w http.ResponseWriter, r *http.Request) {
+func AssigmentInvestment(w http.ResponseWriter, r *http.Request) {
     creditAsigner := &CreditAssignerImpl{}
 
     var credit Credit

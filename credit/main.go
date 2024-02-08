@@ -19,7 +19,7 @@ func main() {
 
     r := mux.NewRouter()
 
-    r.HandleFunc("/credit-assigment", handlers.AssigmentInvesment).Methods("POST")
+    r.HandleFunc("/credit-assigment", handlers.AssigmentInvestment).Methods("POST")
 
 	if os.Getenv("MODE") == "dev" {
 		log.Println("Run server in port 8000")

@@ -22,7 +22,7 @@ POST - http://{{host}}/credit-assigment
 ```
 ## Deploy
 
-PROD
+PROD: Se usa [Serverless Framework](https://www.serverless.com/framework/docs/getting-started) para el deploy de la API, se require tener una cuenta de AWS.
 
 ```bash
 make deploy
