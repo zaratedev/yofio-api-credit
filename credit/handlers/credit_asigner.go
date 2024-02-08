@@ -1,9 +1,12 @@
 package handlers
 
 import (
+    "context"
     "errors"
     "encoding/json"
     "net/http"
+
+    "go.mongodb.org/mongo-driver/mongo"
 )
 
 type CreditAssigner interface {
@@ -16,7 +19,12 @@ type Credit struct {
     Investment int32 `json:"investment"`
 }
 
-func AssigmentInvestment(w http.ResponseWriter, r *http.Request) {
+type Assignment struct {
+    Successful bool    `json:"successful"`
+    Investment int32 `json:"investment"`
+}
+
+func AssigmentInvestment(w http.ResponseWriter, r *http.Request, collection *mongo.Collection) {
     creditAsigner := &CreditAssignerImpl{}
 
     var credit Credit
@@ -29,6 +37,18 @@ func AssigmentInvestment(w http.ResponseWriter, r *http.Request) {
     }
 
     credit300, credit500, credit700, err := creditAsigner.Assign(credit.Investment)
+
+    assignment := Assignment{
+        Successful: err == nil,
+        Investment: credit.Investment,
+    }
+
+    _, errors := collection.InsertOne(context.Background(), assignment)
+
+    if errors != nil {
+        http.Error(w, "Failed to save assignment", http.StatusInternalServerError)
+        return
+    }
 
     if err != nil {
         http.Error(w, "", http.StatusBadRequest)
