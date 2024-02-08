@@ -10,3 +10,9 @@ clean:
 
 deploy: clean build
 	sls deploy --verbose
+
+run: 
+	clean
+	cp .env.local .env
+	go mod download
+	go run credit/main.go
