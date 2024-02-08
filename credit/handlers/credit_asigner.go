@@ -20,8 +20,8 @@ type Credit struct {
 }
 
 type Assignment struct {
-    Successful bool    `json:"successful"`
-    Investment int32 `json:"investment"`
+    Successful bool  `bson:"successful" json:"successful"`
+    Investment int32 `bson:"investment" json:"investment"`
 }
 
 func AssigmentInvestment(w http.ResponseWriter, r *http.Request, collection *mongo.Collection) {

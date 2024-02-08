@@ -39,6 +39,10 @@ func main() {
     r.HandleFunc("/credit-assigment", func(w http.ResponseWriter, r *http.Request) {
         handlers.AssigmentInvestment(w, r, collection)
     }).Methods("POST")
+
+    r.HandleFunc("/statistics", func(w http.ResponseWriter, r *http.Request) {
+        handlers.StatisticsHandler(w, r, collection)
+    }).Methods("POST")
 	
     if os.Getenv("MODE") == "dev" {
         log.Println("Run server in port 8000")
