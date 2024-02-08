@@ -7,7 +7,7 @@ import (
 )
 
 type CreditAssigner interface {
-	Assign(investment int32) (int32, int32, int32, error)
+    Assign(investment int32) (int32, int32, int32, error)
 }
 
 type CreditAssignerImpl struct{}
@@ -49,20 +49,20 @@ func AssigmentInvestment(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ca *CreditAssignerImpl) Assign(investment int32) (int32, int32, int32, error) {
-	if investment < 300 || investment%100 != 0 {
-		return 0, 0, 0, errors.New("invalid investment amount")
-	}
-
-	for c1 := int32(1); c1 <= (investment / 300) / 2; c1++ {
-		for c2 := int32(1); c2 < (investment / 500) / 2; c2++ {
-			for c3 := int32(1); c3 <= (investment / 700) / 2; c3++ {
+    if investment < 300 || investment%100 != 0 {
+        return 0, 0, 0, errors.New("invalid investment amount")
+    }
+    
+    for c1 := int32(1); c1 <= (investment / 300) / 2; c1++ {
+        for c2 := int32(1); c2 < (investment / 500) / 2; c2++ {
+            for c3 := int32(1); c3 <= (investment / 700) / 2; c3++ {
                 sum := (c1 * 300) + (c2 * 500) + (c3 * 700)
-				if sum == investment {
-					return c1, c2, c3, nil
-				}
-			}
-		}
-	}
-
-	return 0, 0, 0, errors.New("no valid assignment found")
+                if sum == investment {
+                    return c1, c2, c3, nil
+                }
+            }
+        }
+    }
+    
+    return 0, 0, 0, errors.New("no valid assignment found")
 }
