@@ -32,7 +32,7 @@ curl  -X POST \
   'http://localhost:8000/credit-assigment' \
   --header 'Accept: */*' \
   --header 'Content-Type: application/json' \
-  --data-raw '{"investment": 3000}'
+  --data-raw '{"investment": 6700}'
 ```
 
 Respuesta
