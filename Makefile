@@ -8,7 +8,10 @@ build:
 clean:
 	rm -rf ./bin
 
-deploy: clean build
+deploy: clean 
+	cp .env.prod .env
+	go mod download
+	make build
 	sls deploy --verbose
 
 run: clean

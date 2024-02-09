@@ -37,6 +37,13 @@ curl  -X POST \
 
 Respuesta
 
+```json
+{
+  "credit_type_300": 7,
+  "credit_type_500": 5,
+  "credit_type_700": 3
+}
+```
 
 ```bash
 POST - http://{{host}}/statistics
@@ -47,11 +54,20 @@ Ejemplo Request
 ```curl
 curl  -X POST \
   'http://localhost:8000/statistics' \
-  --header 'Accept: */*' \
-  --header 'Content-Type: application/json' \
+  --header 'Accept: */*'
 ```
 
 Respuesta
+
+```json
+{
+  "total": 3,
+  "successful": 2,
+  "unsuccessful": 1,
+  "average_successful": 4850,
+  "average_unsuccessful": 400
+}
+```
 
 ## Deploy
 
